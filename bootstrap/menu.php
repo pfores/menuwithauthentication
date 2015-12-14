@@ -14,20 +14,21 @@ MenuWithAuthentication::Menu()
     ->url('/home')
     ->rol('home')
     ->permission('home')
-    ->user('pfores');
+    ->user('albertmayor');
 
 //Another link
 MenuWithAuthentication::Menu()
     ->title('Another link')
-    ->user(5);
+    ->icon('fa-link')
+    ->user(1);
 
 //Multilevel
-MenuWithAuthentication::Menu()->title('Multilevel')->icon('fa-credit-card');
-MenuWithAuthentication::Menu()->title('Link in Level 2')->icon('fa-briefcase');
-MenuWithAuthentication::Menu()->title('Link in Level 3')->icon('fa-user');
+MenuWithAuthentication::Menu()->title('Multilevel')->icon('fa-caret-down');
+MenuWithAuthentication::Menu()->title('Level2')->icon('fa-caret-right');
+MenuWithAuthentication::Menu()->title('Level3')->icon('fa-caret-right');
 
 
 MenuWithAuthentication::Menu()
-    ->title('Ultim menu')
-    ->icon('fa-dashboard')
+    ->title('Ultim element')
+    ->icon('fa-ban')
     ->url('http://www.google.com');
