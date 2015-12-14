@@ -8,6 +8,10 @@ namespace MenuWithAuthentication\Menu;
  * Date: 14/12/15
  * Time: 17:45
  */
+/**
+ * Class MenuItem
+ * @package MenuWithAuthentication\Menu
+ */
 class MenuItem
 {
     /**
@@ -34,14 +38,19 @@ class MenuItem
      * @var
      */
     protected $user;
+    /**
+     * @var
+     */
+    private $id;
 
 
     /**
      * MenuItem constructor.
      */
-    public function __construct()
+    public function __construct($id)
     {
 
+        $this->id = $id;
     }
 
     /**
@@ -128,16 +137,23 @@ class MenuItem
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->render();
     }
 
+    /**
+     * @return string
+     */
     public function render()
     {
         $data = array();
         $data['url'] = $this->url;
         $data['icon'] = $this->icon;
+        $data['id'] = $this->id;
 //        $data['permission'] = $this->permission;
 //        $data['rol'] = $this->rol;
 //        $data['user'] = $this->user;

@@ -6,7 +6,7 @@ use Illuminate\Contracts\View\View;
 
 /**
  * Created by PhpStorm.
- * User: pfores
+ * User: pau
  * Date: 14/12/15
  * Time: 17:10
  */
@@ -30,7 +30,9 @@ class SidebarComposer {
 
     private function getSideBarMenu()
     {
-        $menu = MenuWithAuthentication::instance()->getMenu();
+        $menu =
+            MenuWithAuthentication::instance()
+                ->getMenu();
         return array($menu);
     }
 }

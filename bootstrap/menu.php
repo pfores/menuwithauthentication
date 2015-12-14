@@ -8,7 +8,7 @@
 
 
 //Home
-MenuWithAuthentication::Menu()
+MenuWithAuthentication::Menu('home')
     ->title('Home')
     ->icon('fa-dashboard')
     ->url('/home')
@@ -17,18 +17,17 @@ MenuWithAuthentication::Menu()
     ->user('albertmayor');
 
 //Another link
-MenuWithAuthentication::Menu()
+MenuWithAuthentication::Menu('anotlink')
     ->title('Another link')
-    ->icon('fa-link')
-    ->user(1);
+    ->user(5);
 
 //Multilevel
-MenuWithAuthentication::Menu()->title('Multilevel')->icon('fa-caret-down');
-MenuWithAuthentication::Menu()->title('Level2')->icon('fa-caret-right');
-MenuWithAuthentication::Menu()->title('Level3')->icon('fa-caret-right');
+MenuWithAuthentication::Menu('multi')->title('Multilevel')->icon('fa-caret-down');
+MenuWithAuthentication::Menu('link2')->title('Level2')->icon('fa-caret-right');
+MenuWithAuthentication::Menu('link3')->title('Level3')->icon('fa-caret-right');
 
 
-MenuWithAuthentication::Menu()
+MenuWithAuthentication::Menu('link4')
     ->title('Ultim element')
     ->icon('fa-ban')
     ->url('http://www.google.com');
