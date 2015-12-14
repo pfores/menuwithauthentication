@@ -135,6 +135,13 @@ class MenuItem
 
     public function render()
     {
-        return "";
+        $data = array();
+        $data['url'] = $this->url;
+        $data['icon'] = $this->icon;
+//        $data['permission'] = $this->permission;
+//        $data['rol'] = $this->rol;
+//        $data['user'] = $this->user;
+        $data['title'] = $this->title;
+        return (String) view('menu.menuitem',$data);
     }
 }
