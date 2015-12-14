@@ -48,10 +48,10 @@ class MenuWithAuthentication
      * @return null|static
      *
      */
-    public static function instance()
+    public static function instance($id)
     {
         if (is_null(static::$instance)) {
-            return static::$instance = new static;
+            return static::$instance = new static($id);
         }
         return static::$instance;
     }
