@@ -26,15 +26,15 @@ class MenuItem
     /**
      * @var
      */
-    protected $icon;
+    protected $role;
     /**
      * @var
      */
-    protected $url;
+    protected $icon = null;
     /**
      * @var
      */
-    protected $rol;
+    protected $url = null;
     /**
      * @var
      */
@@ -44,45 +44,43 @@ class MenuItem
      */
     protected $user;
     /**
-     * @var
+     * Current menu item
+     * @var MenuItem
      */
-    protected $level;
-    /**
-     * @var
-     */
-    protected $subItems;
-
+    public static $current;
     /**
      * @var
      */
     private $id;
-
     /**
-     * @var
+     * Menu item depth level
+     * @var int
      */
-    public static $current;
-
-
+    protected $level;
+    /**
+     * Menu item subitems
+     * @var MenuItem[]
+     */
+    protected $subItems = [];
     /**
      * MenuItem constructor.
      */
     public function __construct($id)
     {
-
         $this->id = $id;
-
         if (is_null(static::$current))
         {
             static::$current = $this;
-            $this ->level(0);
-        } else{
+            $this->level(0);
+        } else
+        {
             static::$current->addItem($this);
             $this->level(static::$current->level() + 1);
         }
     }
-
     /**
-     * @param $item
+     * Add subitem
+     * @param MenuItem $item
      * @return $this
      */
     public function addItem($item)
@@ -90,7 +88,20 @@ class MenuItem
         $this->subItems[] = $item;
         return $this;
     }
-
+    /**
+     * Get or set menu item depth level
+     * @param int|null $level
+     * @return $this|int
+     */
+    public function level($level = null)
+    {
+        if ($level == null)
+        {
+            return $this->level;
+        }
+        $this->level = $level;
+        return $this;
+    }
     /**
      * @param null $title
      * @return $this
@@ -100,11 +111,9 @@ class MenuItem
         if ($title == null) {
             return $this->title;
         }
-
         $this->title = $title;
         return $this;
     }
-
     /**
      * @param null $icon
      * @return $this
@@ -114,81 +123,57 @@ class MenuItem
         if ($icon == null) {
             return $this->icon;
         }
-
         $this->icon = $icon;
         return $this;
     }
-
     /**
      * @param null $url
      * @return $this
      */
-    public function url ($url=null)
+    public function url($url=null)
     {
         if ($url == null) {
             return $this->url;
         }
-
         $this->url = $url;
         return $this;
     }
-
     /**
-     * @param null $level
+     * @param null $role
      * @return $this
      */
-    public function level($level = null)
+    public function role($role=null)
     {
-        if (is_null($level)) {
-            return $this->level;
+        if ($role == null) {
+            return $this->role;
         }
-
-        $this->level = $level;
+        $this->role = $role;
         return $this;
     }
-
-    /**
-     * @param null $rol
-     * @return $this
-     */
-    public function rol ($rol=null)
-    {
-        if ($rol == null) {
-            return $this->rol;
-        }
-
-        $this->rol = $rol;
-        return $this;
-    }
-
     /**
      * @param null $permission
      * @return $this
      */
-    public function permission ($permission=null)
+    public function permission($permission=null)
     {
         if ($permission == null) {
             return $this->permission;
         }
-
         $this->permission = $permission;
         return $this;
     }
-
     /**
      * @param null $user
      * @return $this
      */
-    public function user ($user=null)
+    public function user($user=null)
     {
         if ($user == null) {
             return $this->user;
         }
-
         $this->user = $user;
         return $this;
     }
-
     /**
      * @return string
      */
@@ -196,7 +181,6 @@ class MenuItem
     {
         return $this->render();
     }
-
     /**
      * @return string
      */
@@ -205,11 +189,22 @@ class MenuItem
         $data = array();
         $data['url'] = $this->url;
         $data['icon'] = $this->icon;
+        $data['title'] = $this->title;
         $data['id'] = $this->id;
 //        $data['permission'] = $this->permission;
-//        $data['rol'] = $this->rol;
+//        $data['rol'] = $this->role;
 //        $data['user'] = $this->user;
-        $data['title'] = $this->title;
         return (String) view('menu.menuitem',$data);
+    }
+    /**
+     * Get or set menu item subitems
+     * @return $this|MenuItem[]
+     */
+    public function items()
+    {
+        $old = static::$current;
+        static::$current = $this;
+        static::$current = $old;
+        return $this;
     }
 }
